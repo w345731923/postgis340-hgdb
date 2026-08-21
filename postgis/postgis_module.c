@@ -26,6 +26,7 @@
 #include "postgres.h"
 #include "fmgr.h"
 #include "executor/executor.h"
+#include "utils/builtins.h"
 #include "utils/elog.h"
 #include "utils/guc.h"
 #include "libpq/pqsignal.h"
@@ -157,4 +158,55 @@ static void onExecutorStart(QueryDesc *queryDesc, int eflags) {
     } else {
         standard_ExecutorStart(queryDesc, eflags);
     }
+}
+
+/***************************************************************
+ * Version functions
+ ***************************************************************/
+
+#define HG_GIS_NAME        "HG GIS"
+#define HG_GIS_VERSION     "1.0.0"
+
+#ifndef HG_XXX_COMMITNO
+#define HG_XXX_COMMITNO    "000000000"
+#endif
+
+
+PG_FUNCTION_INFO_V1(hg_gis_version);
+PG_FUNCTION_INFO_V1(hg_gis_build_version);
+
+
+/*
+ * return 1.0.0
+ */
+Datum
+hg_gis_version(PG_FUNCTION_ARGS)
+{
+    PG_RETURN_TEXT_P(cstring_to_text(HG_GIS_VERSION));
+}
+
+
+/*
+ * return build version str
+ * like HG GIS x86_64 V1.0.0-20241220-083b4fa
+ */
+Datum
+hg_gis_build_version(PG_FUNCTION_ARGS)
+{
+    StringInfoData data;
+    text *ret;
+
+    initStringInfo(&data);
+
+    appendStringInfo(&data, "%s %s V%s-%s-%s",
+                     HG_GIS_NAME,
+                     HG_BUILD_CPU,
+                     HG_GIS_VERSION,
+                     HG_BUILD_DATE,
+                     HG_XXX_COMMITNO);
+
+    ret = cstring_to_text(data.data);
+    pfree(data.data);
+
+    PG_RETURN_TEXT_P(ret);
 }

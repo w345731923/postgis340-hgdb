@@ -1,0 +1,18 @@
+--
+-- functions for version
+--
+
+-- hg_gis_version
+CREATE OR REPLACE FUNCTION hg_gis_version()
+    RETURNS text
+    LANGUAGE c
+    AS 'MODULE_PATHNAME'
+    IMMUTABLE STRICT PARALLEL SAFE;
+
+
+-- hg_gis_build_version
+CREATE OR REPLACE FUNCTION hg_gis_build_version()
+    RETURNS text
+    LANGUAGE c
+    AS 'MODULE_PATHNAME'
+    IMMUTABLE STRICT PARALLEL SAFE;

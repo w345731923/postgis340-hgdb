@@ -6942,5 +6942,6 @@ CREATE OR REPLACE FUNCTION ST_3DLineInterpolatePoint(geometry, float8)
 -- moved to separate file cause its involved
 #include "postgis_spgist.sql.in"
 #include "postgis_letters.sql"
+#include "postgis_version.sql.in"
 
 COMMIT;
