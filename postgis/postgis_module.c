@@ -22,7 +22,7 @@
  *
  **********************************************************************/
 
-
+#include "../postgis_config.h"
 #include "postgres.h"
 #include "fmgr.h"
 #include "executor/executor.h"
@@ -164,13 +164,8 @@ static void onExecutorStart(QueryDesc *queryDesc, int eflags) {
  * Version functions
  ***************************************************************/
 
-#define HG_GIS_NAME        "HG GIS"
+#define HG_GIS_NAME        "HGGIS"
 #define HG_GIS_VERSION     "1.0.0"
-
-#ifndef HG_XXX_COMMITNO
-#define HG_XXX_COMMITNO    "000000000"
-#endif
-
 
 PG_FUNCTION_INFO_V1(hg_gis_version);
 PG_FUNCTION_INFO_V1(hg_gis_build_version);

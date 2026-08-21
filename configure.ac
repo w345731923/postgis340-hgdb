@@ -1721,6 +1721,37 @@ AC_SUBST([FLATGEOBUF_LDFLAGS])
 DEPS_MAKEFILE_LIST="$DEPS_MAKEFILE_LIST
 		deps/flatgeobuf/Makefile"
 
+dnl ============================================================
+dnl HG GIS build information
+dnl ============================================================
+
+AC_CANONICAL_HOST
+
+HG_BUILD_CPU="$host_cpu"
+HG_BUILD_DATE=`date +%Y%m%d`
+
+HG_XXX_COMMITNO=`git -C "$srcdir" rev-parse --short=9 HEAD 2>/dev/null`
+if test -z "$HG_XXX_COMMITNO"; then
+    HG_XXX_COMMITNO="000000000"
+fi
+
+AC_DEFINE_UNQUOTED(
+    [HG_BUILD_CPU],
+    ["$HG_BUILD_CPU"],
+    [HG GIS build CPU type]
+)
+
+AC_DEFINE_UNQUOTED(
+    [HG_BUILD_DATE],
+    ["$HG_BUILD_DATE"],
+    [HG GIS build date]
+)
+
+AC_DEFINE_UNQUOTED(
+    [HG_XXX_COMMITNO],
+    ["$HG_XXX_COMMITNO"],
+    [HG GIS git commit number]
+)
 
 
 dnl ===========================================================================

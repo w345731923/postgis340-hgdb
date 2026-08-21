@@ -80,6 +80,15 @@
 /* Location of PostgreSQL locale directory */
 #undef PGSQL_LOCALEDIR
 
+/* HG GIS build CPU type */
+#undef HG_BUILD_CPU
+
+/* HG GIS build date */
+#undef HG_BUILD_DATE
+
+/* HG GIS git commit number */
+#undef HG_XXX_COMMITNO
+
 /* PostGIS build date */
 #undef POSTGIS_BUILD_DATE
 
